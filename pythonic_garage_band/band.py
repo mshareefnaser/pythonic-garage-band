@@ -72,9 +72,12 @@ class Drummer(Musician):
 
 
 class Band(Musician):
-    def __init__(self, name,members):
+    instances = []
+
+    def __init__(self, name, members):
         self.name = name
         self.members = members
+        Band.instances.append(self)
         super().__init__(name)
 
     def __repr__(self):
@@ -82,9 +85,11 @@ class Band(Musician):
 
     def __str__(self):
         return f''
-    
-    def to_list (self): #returns a list of previously created Band instances
-        pass
+    @classmethod
+    def to_list(cls):  # returns a list of previously created Band instances
+        return cls.instances
 
-    def play_solos (self): # asks each member musician to play a solo, in the order they were added to band
-        pass
+    # asks each member musician to play a solo, in the order they were added to band
+    def play_solos(cls):
+
+        return [member.play_solo() for member in cls.members]
