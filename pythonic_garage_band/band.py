@@ -1,95 +1,126 @@
 from abc import ABC, abstractmethod
 
+class Musician(ABC):
+    """Abstract base class for musicians."""
 
-class Musician:
-    def __init__(self, name):
+    def __init__(self, name: str):
+        """Initialize a Musician with a name."""
         self.name = name
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return a string representation of a Musician."""
         return f'Musician Name: {self.name}'
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Return a string representation of a Musician for debugging."""
         return f'I\'m representation of Musician: {self.name}'
 
     @abstractmethod
-    def get_instrument(self):
+    def get_instrument(self) -> str:
+        """Return the name of the instrument the Musician plays."""
         pass
 
     @abstractmethod
-    def play_solo(self):
+    def play_solo(self) -> str:
+        """Return a string representation of the Musician's solo."""
         pass
 
 
 class Guitarist(Musician):
-    def __init__(self, name):
+    """A musician who plays the guitar."""
+
+    def __init__(self, name: str):
+        """Initialize a Guitarist with a name."""
         super().__init__(name)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Return a string representation of a Guitarist for debugging."""
         return f'Guitarist instance. Name = {self.name}'
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return a string representation of a Guitarist."""
         return f'My name is {self.name} and I play guitar'
 
-    def get_instrument(self):
+    def get_instrument(self) -> str:
+        """Return the name of the instrument the Guitarist plays."""
         return 'guitar'
 
-    def play_solo(self):
+    def play_solo(self) -> str:
+        """Return a string representation of the Guitarist's solo."""
         return "face melting guitar solo"
 
 
 class Bassist(Musician):
-    def __init__(self, name):
+    """A musician who plays the bass."""
+
+    def __init__(self, name: str):
+        """Initialize a Bassist with a name."""
         super().__init__(name)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Return a string representation of a Bassist for debugging."""
         return f'Bassist instance. Name = {self.name}'
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return a string representation of a Bassist."""
         return f'My name is {self.name} and I play bass'
 
-    def get_instrument(self):
+    def get_instrument(self) -> str:
+        """Return the name of the instrument the Bassist plays."""
         return 'bass'
 
-    def play_solo(self):
+    def play_solo(self) -> str:
+        """Return a string representation of the Bassist's solo."""
         return "bom bom buh bom"
 
 
 class Drummer(Musician):
-    def __init__(self, name):
+    """A musician who plays the drums."""
+
+    def __init__(self, name: str):
+        """Initialize a Drummer with a name."""
         super().__init__(name)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Return a string representation of a Drummer for debugging."""
         return f'Drummer instance. Name = {self.name}'
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return a string representation of a Drummer."""
         return f'My name is {self.name} and I play drums'
 
-    def get_instrument(self):
+    def get_instrument(self) -> str:
+        """Return the name of the instrument the Drummer plays."""
         return 'drums'
 
-    def play_solo(self):
+    def play_solo(self) -> str:
+        """Return a string representation of the Drummer's solo."""
         return 'rattle boom crash'
 
 
-class Band(Musician):
+class Band:
+    """ A band with a name and a list of members. """
     instances = []
 
     def __init__(self, name, members):
+        """Initialize a new Band object with a name and list of members"""
         self.name = name
         self.members = members
         Band.instances.append(self)
-        super().__init__(name)
 
     def __repr__(self):
-        return f''
+        """Return a string representation of a Band object"""
+        return f'Band instance. Name = {self.name}'
 
     def __str__(self):
-        return f''
+        """Return a string representation of a Band object"""
+        return f'{self.name} band'
+
     @classmethod
-    def to_list(cls):  # returns a list of previously created Band instances
+    def to_list(cls):
+        """Return a list of all Band instances"""
         return cls.instances
 
-    # asks each member musician to play a solo, in the order they were added to band
-    def play_solos(cls):
-
-        return [member.play_solo() for member in cls.members]
+    def play_solos(self):
+        """Have each band member play a solo and return a list of the results"""
+        return [member.play_solo() for member in self.members]
